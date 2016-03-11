@@ -908,6 +908,7 @@ function doSwap(playerprm) {
 		}
 		playerselectedcount = 0;
 		potselectedcount = 0;
+		wisselmetdepot = false;
 		EenEnDertigen.trigger();
 	}
 }
