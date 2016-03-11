@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="js/hashmap.min.js"></script>
+    <script type="text/javascript" src="js/sinon-1.17.2.js"></script>
+    <script type="text/javascript" src="js/sweetalert.min.js"></script>
+    <title>EenEnDertigen</title>
+    <link href="css/example.css" rel="stylesheet">
+    <link href="css/sweetalert.css" rel="stylesheet">
+  </head>
+  <body>
+	<div id="container">
+		<button id="wissel_button" class="button">Wissel</button>
+		<button id="omwissel_button" class="button">Omwisselen</button>
+		<button id="pas_button" class="button">Pas</button>
+		<table id="eind_score">
+			<tr><td class="name">Speler1</td><td class="chkbx"><input type="checkbox" id="chk1one" onclick="return false" /></td><td class="chkbx"><input type="checkbox" id="chk2one" onclick="return false" /></td><td id="scoreone" class="score">50</td><td class="name">Speler2</td><td class="chkbx"><input type="checkbox" id="chk1two" onclick="return false" /></td><td class="chkbx"><input type="checkbox" id="chk2two" onclick="return false" /></td><td id="scoretwo" class="score">50</td></tr>
+			<tr><td class="name">Speler3</td><td class="chkbx"><input type="checkbox" id="chk1three" onclick="return false" /></td><td class="chkbx"><input type="checkbox" id="chk2three" onclick="return false" /></td><td id="scorethree" class="score">50</td><td class="name">Speler4</td><td class="chkbx"><input type="checkbox" id="chk1four" onclick="return false" /></td><td class="chkbx"><input type="checkbox" id="chk2four" onclick="return false" /></td><td id="scorefour" class="score">50</td></tr>
+		</table>
+	</div>
+	<div id="topbar"></div>
+	<script src="js/eenendertigen.js"></script>
+	<script src="example.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$("#btn_id2").hide();
+			$("#btn_id3").hide();
+			$("#btn_id4").hide();
+			$("#wissel_button").click(function() {
+				doSwap(1)
+			});
+			$("#omwissel_button").click(function() {
+				doSwap(0)
+			});
+			$("#pas_button").click(function() {
+				doSwap(-1)
+			});
+		});
+	</script>
+  </body>
+</html>
