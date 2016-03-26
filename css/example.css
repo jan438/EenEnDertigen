@@ -507,3 +507,7 @@ table th, td {
     padding: 5px;
     background: #00FF00;
 }
+#stopwatch {
+  position:relative;
+  float:right;
+}
