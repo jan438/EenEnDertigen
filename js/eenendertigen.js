@@ -1430,13 +1430,13 @@ var Deck = (function () {
         ____fontSize = fontSize();
         fisherYates(cards);
         cards.forEach(function (card, i) {
-          card.pos = i;
-
-          card.shuffle(function (i) {
-            if (i === cards.length - 1) {
-              next();
-            }
-          });
+		card.pos = i;
+		card.disableFlipping();
+		card.shuffle(function (i) {
+			if (i === cards.length - 1) {
+				next();
+			}
+		});
         });
         return;
       }
