@@ -1432,6 +1432,7 @@ var Deck = (function () {
         cards.forEach(function (card, i) {
 		card.pos = i;
 		card.disableFlipping();
+		card.disableDragging();
 		card.shuffle(function (i) {
 			if (i === cards.length - 1) {
 				next();
