@@ -8,6 +8,10 @@ $.urlParam = function(name) {
 		return results[1] || 0;
 	}
 }
+const verbiedstate = -2;
+const verbiedcard = -2;
+const passtate = -1;
+const pascard = -1;
 var EenEnDertigen = {};
 var wisselmetdepot = true;
 var startspeler = 1;
@@ -354,17 +358,17 @@ EenEnDertigen.spelerai.prototype.aikaartwissel = function() {
 				}
 			}
 			if (bestSelection[2] === 30.5) {
-				handkaart = -1;
-				tafelkaart = -1;
+				handkaart = pascard;
+				tafelkaart = pascard;
 			}
 			else
 			if (bestSelection[2] === 31) {
-				handkaart = -2;
-				tafelkaart = -2;
+				handkaart = verbiedcard;
+				tafelkaart = verbiedcard;
 			}
 			else {
-				handkaart = -1;
-				tafelkaart = -1;
+				handkaart = pascard;
+				tafelkaart = pascard;
 			}
 		}
 		if (!cardwissel) {
@@ -374,12 +378,12 @@ EenEnDertigen.spelerai.prototype.aikaartwissel = function() {
 	}
 	else {
 		if (bestscore === 30.5) {
-			handkaart = -1;
-			tafelkaart = -1;
+			handkaart = pascard;
+			tafelkaart = pascard;
 		}
 		if (bestscore === 31) {
-			handkaart = -2;
-			tafelkaart = -2;
+			handkaart = verbiedcard;
+			tafelkaart = verbiedcard;
 		}
 	}
 	return [handkaart, tafelkaart];
@@ -435,7 +439,7 @@ EenEnDertigen.doWissel = function (playerprm) {
 				var kaartwissel = speler2.aikaartwissel();
 				player2card = kaartwissel[0];
 				player0card = kaartwissel[1];
-				if (!(player2card === -1) && !(player2card === -2)) {
+				if (!(player2card === pascard) && !(player2card === verbiedcard)) {
 					if (!speler2.stub) {
 						speler2.cards[player2card].setSide('front');
 						speler0.cards[player0card].setSide('back');
@@ -459,15 +463,15 @@ EenEnDertigen.doWissel = function (playerprm) {
 							showConfirmButton: false,
 							html: true
 						});
-						speler2.state = -2;
-						speler3.state = -2;
-						speler4.state = -2;
-						speler1.state = -2;
+						speler2.state = verbiedstate;
+						speler3.state = verbiedstate;
+						speler4.state = verbiedstate;
+						speler1.state = verbiedstate;
 					}
 					break;
 				}
-				if (!(player2card === -2)) {
-					speler2.state = -1;
+				if (!(player2card === verbiedcard)) {
+					speler2.state = passtate;
 					playerselectedcount = 0;
 					potselectedcount = 0;
 					swal({
@@ -524,7 +528,7 @@ EenEnDertigen.doWissel = function (playerprm) {
 				var kaartwissel = speler3.aikaartwissel();
 				player3card = kaartwissel[0];
 				player0card = kaartwissel[1];
-				if (!(player3card === -1) && !(player3card === -2)) {
+				if (!(player3card === pascard) && !(player3card === verbiedcard)) {
 					if (!speler3.stub) {
 						speler3.cards[player3card].setSide('front');
 						speler0.cards[player0card].setSide('back');
@@ -548,15 +552,15 @@ EenEnDertigen.doWissel = function (playerprm) {
 							showConfirmButton: false,
 							html: true
 						});
-						speler2.state = -2;
-						speler3.state = -2;
-						speler4.state = -2;
-						speler1.state = -2;
+						speler2.state = verbiedstate;
+						speler3.state = verbiedstate;
+						speler4.state = verbiedstate;
+						speler1.state = verbiedstate;
 					}
 					break;
 				}
-				if (!(player3card === -2)) {
-					speler3.state = -1;
+				if (!(player3card === verbiedcard)) {
+					speler3.state = passtate;
 					playerselectedcount = 0;
 					potselectedcount = 0;
 					swal({
@@ -610,7 +614,7 @@ EenEnDertigen.doWissel = function (playerprm) {
 				var kaartwissel = speler4.aikaartwissel();
 				player4card = kaartwissel[0];
 				player0card = kaartwissel[1];
-				if (!(player4card === -1) && !(player4card === -2)) {
+				if (!(player4card === pascard) && !(player4card === verbiedcard)) {
 					if (!speler4.stub) {
 						speler4.cards[player4card].setSide('front');
 						speler0.cards[player0card].setSide('back');
@@ -634,15 +638,15 @@ EenEnDertigen.doWissel = function (playerprm) {
 							showConfirmButton: false,
 							html: true
 						});
-						speler2.state = -2;
-						speler3.state = -2;
-						speler4.state = -2;
-						speler1.state = -2;
+						speler2.state = verbiedstate;
+						speler3.state = verbiedstate;
+						speler4.state = verbiedstate;
+						speler1.state = verbiedstate;
 					}
 					break;
 				}
-				if (!(player4card === -2)) {
-					speler4.state = -1;
+				if (!(player4card === verbiedcard)) {
+					speler4.state = passtate;
 					playerselectedcount = 0;
 					potselectedcount = 0;
 					swal({
@@ -718,31 +722,31 @@ function doSwap(playerprm) {
 					showConfirmButton: false,
 					html: true
 				});
-				speler2.state = -2;
-				speler3.state = -2;
-				speler4.state = -2;
-				speler1.state = -2;
+				speler2.state = verbiedstate;
+				speler3.state = verbiedstate;
+				speler4.state = verbiedstate;
+				speler1.state = verbiedstate;
 			}
 			var pasgiven = false;
 			var pasgivencount = 0;
-			if (speler1.state === -1) {
+			if (speler1.state === passtate) {
 				pasgiven = true;
 				pasgivencount++;
 			}
-			if (speler2.state === -1) {
+			if (speler2.state === passtate) {
 				pasgiven = true;
 				pasgivencount++;
 			}
-			if (speler3.state === -1) {
+			if (speler3.state === passtate) {
 				pasgiven = true;
 				pasgivencount++;
 			}
-			if (speler4.state === -1) {
+			if (speler4.state === passtate) {
 				pasgiven = true;
 				pasgivencount++;
 			}
 			if (pasgiven) {
-				speler1.state = -1;
+				speler1.state = passtate;
 				pasgiven = true;
 				pasgivencount++;
 				if (pasgivencount === 4) {
@@ -806,29 +810,29 @@ function doSwap(playerprm) {
 		EenEnDertigen.doWissel(playerprm);
 		var pasgiven = false;
 		var pasgivencount = 0;
-		if (speler1.state === -1) {
+		if (speler1.state === passtate) {
 			pasgiven = true;
 			pasgivencount++;
 		}
-		if (speler2.state === -1) {
+		if (speler2.state === passtate) {
 			pasgiven = true;
 			pasgivencount++;
 		}
-		if (speler3.state === -1) {
+		if (speler3.state === passtate) {
 			pasgiven = true;
 			pasgivencount++;
 		}
-		if (speler4.state === -1) {
+		if (speler4.state === passtate) {
 			pasgiven = true;
 			pasgivencount++;
 		}
 		if (pasgiven) {
 			switch (playerprm) {
-				case 2 : speler2.state = -1;
+				case 2 : speler2.state = passtate;
 					break;
-				case 3 : speler3.state = -1;
+				case 3 : speler3.state = passtate;
 					break;
-				case 4 : speler4.state = -1;
+				case 4 : speler4.state = passtate;
 					break;
 			}
 			pasgiven = true;
@@ -858,7 +862,7 @@ function doSwap(playerprm) {
 		potselectedcount = 0;
 		if (!wisselmetdepot) {
 			$('#chk2one').prop('checked', true);
-			speler1.state = -1;
+			speler1.state = passtate;
 		}
 		wisselmetdepot = false;
 		EenEnDertigen.trigger();
@@ -904,7 +908,7 @@ function doSwap(playerprm) {
 			$('#chk1two').prop('checked', false);
 			$('#chk1three').prop('checked', false);
 			$('#chk1four').prop('checked', false);
-			speler1.state = -1;
+			speler1.state = passtate;
 		}
 		playerselectedcount = 0;
 		potselectedcount = 0;
