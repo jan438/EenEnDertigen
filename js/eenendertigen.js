@@ -410,6 +410,12 @@ EenEnDertigen.doWissel = function (playerprm) {
 			if (speler4.state === 0) {
 				setTimeout(function () { $("#btn_id4").trigger('click'); }, triggertimeout);
 			}
+			else {
+				if (speler1.state === 0) setTimeout(function(){
+					$('#chk1two').prop('checked', false);
+					$('#chk1one').prop('checked', true);
+				}, 7500);
+			}
 			var pot = EenEnDertigen.handtosymbols(speler0.cards);
 			var eigenhand = EenEnDertigen.handtosymbols(speler2.cards);
 			var scorepot = EenEnDertigen.scorewissel(pot);
@@ -498,6 +504,12 @@ EenEnDertigen.doWissel = function (playerprm) {
 			break;
 		case 3: if (speler4.state === 0) {
 				setTimeout(function () { $("#btn_id4").trigger('click'); }, triggertimeout);
+			}
+			else {
+				if (speler1.state === 0) setTimeout(function(){
+					$('#chk1three').prop('checked', false);
+					$('#chk1one').prop('checked', true);
+				}, 7500);
 			}
 			var pot = EenEnDertigen.handtosymbols(speler0.cards);
 			var eigenhand = EenEnDertigen.handtosymbols(speler3.cards);
@@ -607,6 +619,10 @@ EenEnDertigen.doWissel = function (playerprm) {
 			if ((speler4.state === 0) && !wisselmetdepot && !gewisseldmetdepot)  {
 				$('#chk1four').prop('checked', true);
 				$('#chk1one').prop('checked', false);
+				if (speler1.state === 0) setTimeout(function(){
+					$('#chk1four').prop('checked', false);
+					$('#chk1one').prop('checked', true);
+				}, 7500);
 				$('#chk1two').prop('checked', false);
 				$('#chk1three').prop('checked', false);
 				playerselectedcount = 0;
