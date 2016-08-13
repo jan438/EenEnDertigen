@@ -27,6 +27,15 @@ EenEnDertigen.gameover = function () {
 	var eigenhand;
 	var score;
 	var endscore;
+	speler2.cards[0].setSide('front');
+	speler2.cards[1].setSide('front');
+	speler2.cards[2].setSide('front');
+	speler3.cards[0].setSide('front');
+	speler3.cards[1].setSide('front');
+	speler3.cards[2].setSide('front');
+	speler4.cards[0].setSide('front');
+	speler4.cards[1].setSide('front');
+	speler4.cards[2].setSide('front');
 	for (var i = 1; i < 5; i++) {
 		switch (i) {
 			case 1: eigenhand = EenEnDertigen.handtosymbols(speler1.cards);
@@ -782,15 +791,6 @@ function doSwap(playerprm) {
 				EenEnDertigen.trigger();
 			}
 			else {
-				speler2.cards[0].setSide('front');
-				speler2.cards[1].setSide('front');
-				speler2.cards[2].setSide('front');
-				speler3.cards[0].setSide('front');
-				speler3.cards[1].setSide('front');
-				speler3.cards[2].setSide('front');
-				speler4.cards[0].setSide('front');
-				speler4.cards[1].setSide('front');
-				speler4.cards[2].setSide('front');
 				EenEnDertigen.gameover();
 			}
 		}
@@ -807,15 +807,6 @@ function doSwap(playerprm) {
 				}
 			}
 			else {
-				speler2.cards[0].setSide('front');
-				speler2.cards[1].setSide('front');
-				speler2.cards[2].setSide('front');
-				speler3.cards[0].setSide('front');
-				speler3.cards[1].setSide('front');
-				speler3.cards[2].setSide('front');
-				speler4.cards[0].setSide('front');
-				speler4.cards[1].setSide('front');
-				speler4.cards[2].setSide('front');
 				EenEnDertigen.gameover();
 			}
 		}
