@@ -478,10 +478,13 @@ EenEnDertigen.doWissel = function (playerprm) {
 							showConfirmButton: false,
 							html: true
 						});
+						speler1.state = verbiedstate;
 						speler2.state = verbiedstate;
 						speler3.state = verbiedstate;
 						speler4.state = verbiedstate;
-						speler1.state = verbiedstate;
+						setTimeout(function(){
+							EenEnDertigen.gameover();
+						}, 7500);
 					}
 					break;
 				}
@@ -507,6 +510,13 @@ EenEnDertigen.doWissel = function (playerprm) {
 						showConfirmButton: false,
 						html: true
 					});
+					speler1.state = verbiedstate;
+					speler2.state = verbiedstate;
+					speler3.state = verbiedstate;
+					speler4.state = verbiedstate;
+					setTimeout(function(){
+						EenEnDertigen.gameover();
+					}, 7500);
 				}
 				break;
 			}
@@ -573,10 +583,13 @@ EenEnDertigen.doWissel = function (playerprm) {
 							showConfirmButton: false,
 							html: true
 						});
+						speler1.state = verbiedstate;
 						speler2.state = verbiedstate;
 						speler3.state = verbiedstate;
 						speler4.state = verbiedstate;
-						speler1.state = verbiedstate;
+						setTimeout(function(){
+							EenEnDertigen.gameover();
+						}, 7500);
 					}
 					break;
 				}
@@ -602,6 +615,13 @@ EenEnDertigen.doWissel = function (playerprm) {
 						showConfirmButton: false,
 						html: true
 					});
+					speler1.state = verbiedstate;
+					speler2.state = verbiedstate;
+					speler3.state = verbiedstate;
+					speler4.state = verbiedstate;
+					setTimeout(function(){
+						EenEnDertigen.gameover();
+					}, 7500);
 				}
 				break;
 			}
@@ -663,10 +683,13 @@ EenEnDertigen.doWissel = function (playerprm) {
 							showConfirmButton: false,
 							html: true
 						});
+						speler1.state = verbiedstate;
 						speler2.state = verbiedstate;
 						speler3.state = verbiedstate;
 						speler4.state = verbiedstate;
-						speler1.state = verbiedstate;
+						setTimeout(function(){
+							EenEnDertigen.gameover();
+						}, 7500);
 					}
 					break;
 				}
@@ -682,6 +705,10 @@ EenEnDertigen.doWissel = function (playerprm) {
 						html: true
 					});
 					$('#chk2four').prop('checked', true);
+					if (speler1.state === 0) setTimeout(function(){
+						$('#chk1four').prop('checked', false);
+						$('#chk1one').prop('checked', true);
+					}, 7500);
 					break;
 				}
 				else {
@@ -692,6 +719,13 @@ EenEnDertigen.doWissel = function (playerprm) {
 						showConfirmButton: false,
 						html: true
 					});
+					speler1.state = verbiedstate;
+					speler2.state = verbiedstate;
+					speler3.state = verbiedstate;
+					speler4.state = verbiedstate;
+					setTimeout(function(){
+						EenEnDertigen.gameover();
+					}, 7500);
 				}
 				break;
 			}
@@ -747,10 +781,13 @@ function doSwap(playerprm) {
 					showConfirmButton: false,
 					html: true
 				});
+				speler1.state = verbiedstate;
 				speler2.state = verbiedstate;
 				speler3.state = verbiedstate;
 				speler4.state = verbiedstate;
-				speler1.state = verbiedstate;
+				setTimeout(function(){
+					EenEnDertigen.gameover();
+				}, 7500);
 			}
 			var pasgiven = false;
 			var pasgivencount = 0;
@@ -774,7 +811,7 @@ function doSwap(playerprm) {
 				speler1.state = passtate;
 				pasgiven = true;
 				pasgivencount++;
-				if (pasgivencount === 4) {
+				if (pasgivencount >= 4) {
 					EenEnDertigen.gameover();
 				}
 			}
@@ -844,7 +881,7 @@ function doSwap(playerprm) {
 			}
 			pasgiven = true;
 			pasgivencount++;
-			if (pasgivencount === 4) {
+			if (pasgivencount >= 4) {
 				EenEnDertigen.gameover();
 			}
 		}
