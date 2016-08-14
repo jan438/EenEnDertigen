@@ -13,6 +13,7 @@ const verbiedcard = -2;
 const passtate = -1;
 const pascard = -1;
 const speler1pas = -1;
+const startgame = -2;
 var EenEnDertigen = {};
 var wisselmetdepot = true;
 var startspeler = 1;

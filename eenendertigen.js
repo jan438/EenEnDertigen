@@ -53,7 +53,7 @@ $EenEnDertigen.addEventListener('click', function () {
 	deck.shuffle()
 	deck.shuffle()
 	deck.EenEnDertigen()
-	doSwap(-2)
+	doSwap(startgame)
 });
 $player2.addEventListener('click', function () {
 	doSwap(2)
