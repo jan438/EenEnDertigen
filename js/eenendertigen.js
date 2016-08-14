@@ -12,6 +12,7 @@ const verbiedstate = -2;
 const verbiedcard = -2;
 const passtate = -1;
 const pascard = -1;
+const speler1pas = -1;
 var EenEnDertigen = {};
 var wisselmetdepot = true;
 var startspeler = 1;
@@ -937,7 +938,7 @@ function doSwap(playerprm) {
 			}
 		}
 	}
-	if (playerprm === -1) {
+	if (playerprm === speler1pas) {
 		if (speler1.state === 0) {
 			var handsymbols = EenEnDertigen.handtosymbols(speler1.cards);
 			swal({
