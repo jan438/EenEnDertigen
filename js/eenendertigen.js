@@ -14,6 +14,7 @@ const passtate = -1;
 const pascard = -1;
 const speler1pas = -1;
 const startgame = -2;
+const speler1wissel = 0;
 var EenEnDertigen = {};
 var wisselmetdepot = true;
 var startspeler = 1;
@@ -740,57 +741,121 @@ function doSwap(playerprm) {
 	var player0card = -1;
 	var player1card = -1;
 	var strid;
-	if (playerprm === 1) {
-		$('#chk1one').prop('checked', true);
-		$('#chk1two').prop('checked', false);
-		$('#chk1three').prop('checked', false);
-		$('#chk1four').prop('checked', false);
-		var cardwissel = false;
-		wisselmetdepot = false;
-		if (speler1.state === 0) {
-			for (var i = 0, len = speler1.cards.length; i < len; i++) {
-				classlist = speler1.cards[i].$el.className;
-				if (classlist.indexOf("selected") > 0) {
-					player1card = i;
+	switch (playerprm) {
+		case 1:	$('#chk1one').prop('checked', true);
+			$('#chk1two').prop('checked', false);
+			$('#chk1three').prop('checked', false);
+			$('#chk1four').prop('checked', false);
+			var cardwissel = false;
+			wisselmetdepot = false;
+			if (speler1.state === 0) {
+				for (var i = 0, len = speler1.cards.length; i < len; i++) {
+					classlist = speler1.cards[i].$el.className;
+					if (classlist.indexOf("selected") > 0) {
+						player1card = i;
+					}
+					strid = speler1.cards[i].$el.id;
+					$("#" + strid).removeClass('selected');
+					classlist = speler0.cards[i].$el.className;
+					if (classlist.indexOf("selected") > 0) {
+						player0card = i;
+					}
+					strid = speler0.cards[i].$el.id;
+					$("#" + strid).removeClass('selected');
 				}
-				strid = speler1.cards[i].$el.id;
-				$("#" + strid).removeClass('selected');
-				classlist = speler0.cards[i].$el.className;
-				if (classlist.indexOf("selected") > 0) {
-					player0card = i;
+				playerselectedcount = 0;
+				potselectedcount = 0;
+				if ((player1card >= 0) && (player0card >= 0)) {
+//					console.log("Elements to swap: " + speler1.cards[player1card].$el.id + " " + speler0.cards[player0card].$el.id);
+//					console.log("Classlists: " + speler1.cards[player1card].$el.classList + " " + speler0.cards[player0card].$el.classList);
+					swapElements(speler1.cards[player1card], speler0.cards[player0card]);
+					var tempCard = speler1.cards[player1card];
+					speler1.cards[player1card] = speler0.cards[player0card];
+					speler0.cards[player0card] = tempCard;
+					cardwissel = true;
 				}
-				strid = speler0.cards[i].$el.id;
-				$("#" + strid).removeClass('selected');
+				var eigenhand = EenEnDertigen.handtosymbols(speler1.cards);
+				var score = EenEnDertigen.scorewissel(eigenhand);
+				if (score[2] === 31) {
+					swal({
+						title: "<h4 id='swalverbied1'>Verbied! Speler1</h4>",
+						imageUrl: "Cards.png",
+						timer: 2000,
+						showConfirmButton: false,
+						html: true
+					});
+					speler1.state = verbiedstate;
+					speler2.state = verbiedstate;
+					speler3.state = verbiedstate;
+					speler4.state = verbiedstate;
+					setTimeout(function(){
+						EenEnDertigen.gameover();
+					}, 7500);
+				}
+				var pasgiven = false;
+				var pasgivencount = 0;
+				if (speler1.state === passtate) {
+					pasgiven = true;
+					pasgivencount++;
+				}
+				if (speler2.state === passtate) {
+					pasgiven = true;
+					pasgivencount++;
+				}
+				if (speler3.state === passtate) {
+					pasgiven = true;
+					pasgivencount++;
+				}
+				if (speler4.state === passtate) {
+					pasgiven = true;
+					pasgivencount++;
+				}
+				if (pasgiven) {
+					speler1.state = passtate;
+					pasgiven = true;
+					pasgivencount++;
+					if (pasgivencount >= 4) {
+						EenEnDertigen.gameover();
+					}
+				}
 			}
+			var playersinthegame = 0;
+			if (speler1.state === 0) playersinthegame++;
+			if (speler2.state === 0) playersinthegame++;
+			if (speler3.state === 0) playersinthegame++;
+			if (speler4.state === 0) playersinthegame++;
 			playerselectedcount = 0;
 			potselectedcount = 0;
-			if ((player1card >= 0) && (player0card >= 0)) {
-//				console.log("Elements to swap: " + speler1.cards[player1card].$el.id + " " + speler0.cards[player0card].$el.id);
-//				console.log("Classlists: " + speler1.cards[player1card].$el.classList + " " + speler0.cards[player0card].$el.classList);
-				swapElements(speler1.cards[player1card], speler0.cards[player0card]);
-				var tempCard = speler1.cards[player1card];
-				speler1.cards[player1card] = speler0.cards[player0card];
-				speler0.cards[player0card] = tempCard;
-				cardwissel = true;
-			}
-			var eigenhand = EenEnDertigen.handtosymbols(speler1.cards);
-			var score = EenEnDertigen.scorewissel(eigenhand);
-			if (score[2] === 31) {
-				swal({
-					title: "<h4 id='swalverbied1'>Verbied! Speler1</h4>",
-					imageUrl: "Cards.png",
-					timer: 2000,
-					showConfirmButton: false,
-					html: true
-				});
-				speler1.state = verbiedstate;
-				speler2.state = verbiedstate;
-				speler3.state = verbiedstate;
-				speler4.state = verbiedstate;
-				setTimeout(function(){
+			if (cardwissel) {
+				if (playersinthegame > 0) {
+					EenEnDertigen.trigger();
+				}
+				else {
 					EenEnDertigen.gameover();
-				}, 7500);
+				}
 			}
+			else {
+				if (playersinthegame > 0) {
+					if (speler1.state === 0) {
+						swal({
+							title: "<h4 id='swalwissel'>A.u.b. Eerst een kaart omwisselen</h4>",
+							imageUrl: "Cards.png",
+							timer: 2000,
+							showConfirmButton: false,
+							html: true
+						});
+					}
+				}
+				else {
+					EenEnDertigen.gameover();
+				}
+			}
+			break;
+		case 2:
+		case 3:
+		case 4:	playerselectedcount = 0;
+			potselectedcount = 0;
+			EenEnDertigen.doWissel(playerprm);
 			var pasgiven = false;
 			var pasgivencount = 0;
 			if (speler1.state === passtate) {
@@ -810,156 +875,96 @@ function doSwap(playerprm) {
 				pasgivencount++;
 			}
 			if (pasgiven) {
-				speler1.state = passtate;
+				switch (playerprm) {
+					case 2 : speler2.state = passtate;
+						break;
+					case 3 : speler3.state = passtate;
+						break;
+					case 4 : speler4.state = passtate;
+						break;
+				}
 				pasgiven = true;
 				pasgivencount++;
 				if (pasgivencount >= 4) {
 					EenEnDertigen.gameover();
 				}
 			}
-		}
-		var playersinthegame = 0;
-		if (speler1.state === 0) playersinthegame++;
-		if (speler2.state === 0) playersinthegame++;
-		if (speler3.state === 0) playersinthegame++;
-		if (speler4.state === 0) playersinthegame++;
-		playerselectedcount = 0;
-		potselectedcount = 0;
-		if (cardwissel) {
-			if (playersinthegame > 0) {
+			break;
+		case speler1wissel:
+			if (speler1.state === 0) {
+				$('#chk1one').prop('checked', true);
+				$('#chk1two').prop('checked', false);
+				$('#chk1three').prop('checked', false);
+				$('#chk1four').prop('checked', false);
+				for (var i = 0; i < 3; i++) {
+					strid = speler1.cards[i].$el.id;
+					$("#" + strid).removeClass('selected');
+					strid = speler0.cards[i].$el.id;
+					$("#" + strid).removeClass('selected');
+//					console.log("Elements to swap: " + speler1.cards[i].$el.id + " " + speler0.cards[i].$el.id);
+					swapElements(speler1.cards[i], speler0.cards[i]);
+					var tempCard = speler1.cards[i];
+					speler1.cards[i] = speler0.cards[i];
+					speler0.cards[i] = tempCard;
+				}
+				playerselectedcount = 0;
+				potselectedcount = 0;
+				if (!wisselmetdepot) {
+					$('#chk2one').prop('checked', true);
+					speler1.state = passtate;
+				}
+				wisselmetdepot = false;
 				EenEnDertigen.trigger();
 			}
-			else {
-				EenEnDertigen.gameover();
-			}
-		}
-		else {
-			if (playersinthegame > 0) {
-				if (speler1.state === 0) {
-					swal({
-						title: "<h4 id='swalwissel'>A.u.b. Eerst een kaart omwisselen</h4>",
-						imageUrl: "Cards.png",
-						timer: 2000,
-						showConfirmButton: false,
-						html: true
-					});
+			break;
+		case startgame:
+			speler0.state = 0;
+			speler1.state = 0;
+			speler2.state = 0;
+			speler3.state = 0;
+			speler4.state = 0;
+			wisselmetdepot = true;
+			console.log("StartSpeler: " + startspeler + " 1:" + speler1.state + " 2:" + speler2.state + " 3:" + speler3.state + " 4:" + speler4.state + ":" + wisselmetdepot);
+			if ((startspeler > 1) && (startspeler < 5)) {
+				var triggertimeout = 8000;
+				switch (startspeler) {
+					case 2: if (speler2.state === 0) {
+							setTimeout(function () { $("#btn_id2").trigger('click'); }, triggertimeout);
+						}
+						break;
+					case 3: if (speler3.state === 0) {
+							setTimeout(function () { $("#btn_id3").trigger('click'); }, triggertimeout);
+						}
+						break;
+					case 4: if (speler4.state === 0) {
+							setTimeout(function () { $("#btn_id4").trigger('click'); }, triggertimeout);
+						}
+						break;
 				}
 			}
-			else {
-				EenEnDertigen.gameover();
+			break;
+		case speler1pas:
+			if (speler1.state === 0) {
+				var handsymbols = EenEnDertigen.handtosymbols(speler1.cards);
+				swal({
+					title: "<h4 id='swalpas1'>Pas! " + handsymbols + "</h4>",
+					imageUrl: "Cards.png",
+					timer: 2000,
+					showConfirmButton: false,
+					html: true
+				});
+				$('#chk2one').prop('checked', true);
+				$('#chk1one').prop('checked', true);
+				$('#chk1two').prop('checked', false);
+				$('#chk1three').prop('checked', false);
+				$('#chk1four').prop('checked', false);
+				speler1.state = passtate;
 			}
-		}
-	}
-	if ((playerprm > 1) && (playerprm < 5)) {
-		playerselectedcount = 0;
-		potselectedcount = 0;
-		EenEnDertigen.doWissel(playerprm);
-		var pasgiven = false;
-		var pasgivencount = 0;
-		if (speler1.state === passtate) {
-			pasgiven = true;
-			pasgivencount++;
-		}
-		if (speler2.state === passtate) {
-			pasgiven = true;
-			pasgivencount++;
-		}
-		if (speler3.state === passtate) {
-			pasgiven = true;
-			pasgivencount++;
-		}
-		if (speler4.state === passtate) {
-			pasgiven = true;
-			pasgivencount++;
-		}
-		if (pasgiven) {
-			switch (playerprm) {
-				case 2 : speler2.state = passtate;
-					break;
-				case 3 : speler3.state = passtate;
-					break;
-				case 4 : speler4.state = passtate;
-					break;
-			}
-			pasgiven = true;
-			pasgivencount++;
-			if (pasgivencount >= 4) {
-				EenEnDertigen.gameover();
-			}
-		}
-	}
-	if ((playerprm === 0) && (speler1.state === 0)) {
-		$('#chk1one').prop('checked', true);
-		$('#chk1two').prop('checked', false);
-		$('#chk1three').prop('checked', false);
-		$('#chk1four').prop('checked', false);
-		for (var i = 0; i < 3; i++) {
-			strid = speler1.cards[i].$el.id;
-			$("#" + strid).removeClass('selected');
-			strid = speler0.cards[i].$el.id;
-			$("#" + strid).removeClass('selected');
-//			console.log("Elements to swap: " + speler1.cards[i].$el.id + " " + speler0.cards[i].$el.id);
-			swapElements(speler1.cards[i], speler0.cards[i]);
-			var tempCard = speler1.cards[i];
-			speler1.cards[i] = speler0.cards[i];
-			speler0.cards[i] = tempCard;
-		}
-		playerselectedcount = 0;
-		potselectedcount = 0;
-		if (!wisselmetdepot) {
-			$('#chk2one').prop('checked', true);
-			speler1.state = passtate;
-		}
-		wisselmetdepot = false;
-		EenEnDertigen.trigger();
-	}
-	if (playerprm === -2) {
-		speler0.state = 0;
-		speler1.state = 0;
-		speler2.state = 0;
-		speler3.state = 0;
-		speler4.state = 0;
-		wisselmetdepot = true;
-		console.log("StartSpeler: " + startspeler + " 1:" + speler1.state + " 2:" + speler2.state + " 3:" + speler3.state + " 4:" + speler4.state + ":" + wisselmetdepot);
-		if ((startspeler > 1) && (startspeler < 5)) {
-			var triggertimeout = 8000;
-			switch (startspeler) {
-			case 2: if (speler2.state === 0) {
-					setTimeout(function () { $("#btn_id2").trigger('click'); }, triggertimeout);
-				}
-				break;
-			case 3: if (speler3.state === 0) {
-					setTimeout(function () { $("#btn_id3").trigger('click'); }, triggertimeout);
-				}
-				break;
-			case 4: if (speler4.state === 0) {
-					setTimeout(function () { $("#btn_id4").trigger('click'); }, triggertimeout);
-				}
-				break;
-			}
-		}
-	}
-	if (playerprm === speler1pas) {
-		if (speler1.state === 0) {
-			var handsymbols = EenEnDertigen.handtosymbols(speler1.cards);
-			swal({
-				title: "<h4 id='swalpas1'>Pas! " + handsymbols + "</h4>",
-				imageUrl: "Cards.png",
-				timer: 2000,
-				showConfirmButton: false,
-				html: true
-			});
-			$('#chk2one').prop('checked', true);
-			$('#chk1one').prop('checked', true);
-			$('#chk1two').prop('checked', false);
-			$('#chk1three').prop('checked', false);
-			$('#chk1four').prop('checked', false);
-			speler1.state = passtate;
-		}
-		playerselectedcount = 0;
-		potselectedcount = 0;
-		wisselmetdepot = false;
-		EenEnDertigen.trigger();
+			playerselectedcount = 0;
+			potselectedcount = 0;
+			wisselmetdepot = false;
+			EenEnDertigen.trigger();
+			break;
 	}
 }
 function swapElements(card1, card2) {
