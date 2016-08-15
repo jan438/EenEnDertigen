@@ -924,17 +924,11 @@ function doSwap(playerprm) {
 			console.log("StartSpeler: " + startspeler + " 1:" + speler1.state + " 2:" + speler2.state + " 3:" + speler3.state + " 4:" + speler4.state + ":" + wisselmetdepot);
 			var triggertimeout = 8000;
 			switch (startspeler) {
-				case 2: if (speler2.state === 0) {
-						setTimeout(function () { $("#btn_id2").trigger('click'); }, triggertimeout);
-					}
+				case 2:	setTimeout(function () { $("#btn_id2").trigger('click'); }, triggertimeout);
 					break;
-				case 3: if (speler3.state === 0) {
-						setTimeout(function () { $("#btn_id3").trigger('click'); }, triggertimeout);
-					}
+				case 3: setTimeout(function () { $("#btn_id3").trigger('click'); }, triggertimeout);
 					break;
-				case 4: if (speler4.state === 0) {
-						setTimeout(function () { $("#btn_id4").trigger('click'); }, triggertimeout);
-					}
+				case 4: setTimeout(function () { $("#btn_id4").trigger('click'); }, triggertimeout);
 					break;
 			}
 			break;
