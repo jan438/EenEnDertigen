@@ -830,9 +830,6 @@ function doSwap(playerprm) {
 				if (playersinthegame > 0) {
 					EenEnDertigen.trigger();
 				}
-				else {
-					EenEnDertigen.gameover();
-				}
 			}
 			else {
 				if (playersinthegame > 0) {
