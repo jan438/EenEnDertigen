@@ -842,6 +842,9 @@ function doSwap(playerprm) {
 							html: true
 						});
 					}
+					if (speler1.state === passtate) {
+						EenEnDertigen.trigger();
+					}
 				}
 				else {
 					EenEnDertigen.gameover();
