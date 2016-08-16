@@ -872,16 +872,6 @@ function doSwap(playerprm) {
 				pasgivencount++;
 			}
 			if (pasgiven) {
-				switch (playerprm) {
-					case 2 : speler2.state = passtate;
-						break;
-					case 3 : speler3.state = passtate;
-						break;
-					case 4 : speler4.state = passtate;
-						break;
-				}
-				pasgiven = true;
-				pasgivencount++;
 				if (pasgivencount >= 4) {
 					EenEnDertigen.gameover();
 				}
