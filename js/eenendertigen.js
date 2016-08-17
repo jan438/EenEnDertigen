@@ -941,11 +941,11 @@ function doSwap(playerprm) {
 				$('#chk1three').prop('checked', false);
 				$('#chk1four').prop('checked', false);
 				speler1.state = passtate;
+				playerselectedcount = 0;
+				potselectedcount = 0;
+				wisselmetdepot = false;
+				EenEnDertigen.trigger();
 			}
-			playerselectedcount = 0;
-			potselectedcount = 0;
-			wisselmetdepot = false;
-			EenEnDertigen.trigger();
 			break;
 	}
 }
