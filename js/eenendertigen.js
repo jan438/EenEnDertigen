@@ -835,7 +835,7 @@ function doSwap(playerprm) {
 				if (playersinthegame > 0) {
 					if (speler1.state === 0) {
 						swal({
-							title: "<h4 id='swalwissel'>A.u.b. Eerst een kaart omwisselen</h4>",
+							title: "<h4 id='swalwissel'>A.u.b. Eerst twee kaarten selecteren</h4>",
 							imageUrl: "Cards.png",
 							timer: 2000,
 							showConfirmButton: false,
