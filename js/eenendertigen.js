@@ -552,7 +552,7 @@ EenEnDertigen.doWissel = function (playerprm) {
 				}
 				wisselmetdepot = false;
 			}
-			if ((speler2.state === 0) && !wisselmetdepot && !gewisseldmetdepot)  {
+			if ((speler3.state === 0) && !wisselmetdepot && !gewisseldmetdepot)  {
 				$('#chk1three').prop('checked', true);
 				$('#chk1one').prop('checked', false);
 				$('#chk1two').prop('checked', false);
