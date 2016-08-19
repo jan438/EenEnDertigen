@@ -928,8 +928,9 @@ function doSwap(playerprm) {
 		case speler1pas:
 			if (speler1.state === 0) {
 				var handsymbols = EenEnDertigen.handtosymbols(speler1.cards);
+				var res = handsymbols.replace("0", "10");
 				swal({
-					title: "<h4 id='swalpas1'>Pas! " + handsymbols + "</h4>",
+					title: "<h4 id='swalpas1'>Pas! " + res + "</h4>",
 					imageUrl: "Cards.png",
 					timer: 2000,
 					showConfirmButton: false,
