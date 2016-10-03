@@ -400,11 +400,11 @@ EenEnDertigen.spelerai.prototype.aikaartwissel = function() {
 	}
 	return [handkaart, tafelkaart];
 }
-var speler0 = new EenEnDertigen.speler(0, new Array(), 0);
-var speler1 = new EenEnDertigen.speler(1, new Array(), 0);
-var speler2 = new EenEnDertigen.spelerai(2, new Array(), 0);
-var speler3 = new EenEnDertigen.spelerai(3, new Array(), 0);
-var speler4 = new EenEnDertigen.spelerai(4, new Array(), 0);
+var speler0 = new EenEnDertigen.speler(0, [], 0);
+var speler1 = new EenEnDertigen.speler(1, [], 0);
+var speler2 = new EenEnDertigen.spelerai(2, [], 0);
+var speler3 = new EenEnDertigen.spelerai(3, [], 0);
+var speler4 = new EenEnDertigen.spelerai(4, [], 0);
 var playerselectedcount = 0;
 var potselectedcount = 0;
 var cardcoordinates = [[-2.75,-220],[-1.75,-220],[-0.75,-220],[0.75,-220],[1.75,-220],[2.75,-220],[-2.75,-110],[-1.75,-110],[-0.75,-110],[0.75,-110],[1.75,-110],[2.75,-110],[-1.05,110],[-0.05,110],[0.95,110]];
