@@ -1514,11 +1514,11 @@ var Deck = (function () {
 	deck: function deck(_deck4) {
 		_deck4.EenEnDertigen = _deck4.queued(EenEnDertigen);
 		function EenEnDertigen(next) {
-			speler1.cards = new Array();
-			speler2.cards = new Array();
-			speler3.cards = new Array();
-			speler4.cards = new Array();
-			speler0.cards = new Array();
+			speler1.cards = [];
+			speler2.cards = [];
+			speler3.cards = [];
+			speler4.cards = [];
+			speler0.cards = [];
 			speler0.state = 0;
 			speler1.state = 0;
 			speler2.state = 0;
